@@ -12,29 +12,18 @@
 </head>
 
 <body>
-
-    <!--    <img  src="{{ url_for('static', filename='NU.jpg') }}" alt=""> -->
     <h2>Candidate Recommendation from Job Title</h2>
 
-    <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('extract')}}" method="post">
-
         <div style="float:center;margin-right:20px;">
             <label for="text"></label>
-            <!-- <textarea id="ner_text" name="ner_text" rows="10" cols="50"></textarea> -->
+            <!-- <textarea id="text" name="text" rows="10" cols="50"></textarea> -->
             <input type="text" placeholder="Search" id="text" name="text"></input>
         </div>
         <br>
-        <button class="button" value="Submit"><span>Submit</span></button>
-
+        <button class="button" value="Submit"><span>Predict</span></button>
     </form>
-
     <br>
-
-
-
-
-
 </body>
 
 </html>

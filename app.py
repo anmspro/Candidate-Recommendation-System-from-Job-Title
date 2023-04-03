@@ -42,7 +42,7 @@ api = Api(app)
 def home():
     return render_template('index.html')
 
-@app.route('/',methods=['GET', 'POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def extract():
     if request.method=='POST':
         txt = request.form['text']
@@ -74,6 +74,7 @@ def extract():
         output = loaded_model.predict(vector.reshape(1, -1))
 
         out = data.loc[data['title'] == output[0]]
+        print(out)
 
         # for index, row in out.iterrows():
         #     print('id: ', index)

@@ -2,10 +2,8 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
     <title>Candidate Recommendation from Job Title</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> -->
-
 </head>
 
 <body>
@@ -13,12 +11,15 @@
     <br>
     <div>
         <p> {{ out }} </p>
-        <textarea name="output" id="output" cols="30" rows="10">{{ out }}</textarea>
+        <textarea name="output" id="output" cols="30" rows="10">{{ out['description'] }}</textarea>
     </div>
+    <!-- <button onclick="log_console()">console_log</button> -->
 
-    <script>
-        console.log(out)
-    </script>
+    <!-- <script>
+        function log_console() {
+            console.log(out);
+        }
+    </script> -->
 </body>
 
 </html>

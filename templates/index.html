@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate Recommendation from Job Title</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+    <!--    <img  src="{{ url_for('static', filename='NU.jpg') }}" alt=""> -->
+    <h2>Candidate Recommendation from Job Title</h2>
+
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('extract')}}" method="post">
+
+        <div style="float:center;margin-right:20px;">
+            <label for="text"></label>
+            <!-- <textarea id="ner_text" name="ner_text" rows="10" cols="50"></textarea> -->
+            <input type="text" placeholder="Search" id="text" name="text"></input>
+        </div>
+        <br>
+        <button class="button" value="Submit"><span>Submit</span></button>
+
+    </form>
+
+    <br>
+
+
+
+
+
+</body>
+
+</html>

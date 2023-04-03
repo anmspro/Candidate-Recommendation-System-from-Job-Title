@@ -61,6 +61,10 @@ def extract():
                     'gender', 'salary', 'effective_from', 'deadline', 'is_inside_only', 'created_by', 'updated_by', 'created_at', 
                     'updated_at', 'status_id', 'hris_job_id', 'hris_position_id', 'company_id'], axis = 1)
 
+        candidate_data = pd.read_csv('candidate database.csv', low_memory=False)
+        candidate_data = candidate_data[['id', 'candidate_name','skill_name']]
+        candidate_data['similarities'] = 0.0
+
         data['skills'] = ''
 
         for i in range(data.shape[0]):
@@ -74,17 +78,22 @@ def extract():
         output = loaded_model.predict(vector.reshape(1, -1))
 
         out = data.loc[data['title'] == output[0]]
-        print(out)
 
-        # for index, row in out.iterrows():
-        #     print('id: ', index)
-        #     print('Title: ', row['title'])
-        #     print('Experience: ', row['experience'])
-        #     print('Skills: ', row['skills'], '\n')
-        #     print('Description: ', row['description'], '\n')
-        # doc=nlp(txt)
-        # result = displacy.render(doc,style="ent")
+        for index, row in out.iterrows():
+            # print('id: ', index)
+            # print('Title: ', row['title'])
+            # print('Experience: ', row['experience'])
+            # print('Skills: ', row['skills'], '\n')
+            # print('Description: ', row['description'], '\n')
+            required_jd = row['description']
 
+        vec = nlp(required_jd)
+        for i in range(len(candidate_data)):
+            skill = nlp(candidate_data['skill_name'][i])
+            candidate_data['similarities'][i] = skill.similarity(vec)
+
+        candidates_sorted = candidate_data.sort_values(by=['similarities'], ascending=False)
+        print(candidates_sorted.head())
     return render_template('result.html', out=out)
 
 

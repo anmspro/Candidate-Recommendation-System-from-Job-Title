@@ -79,6 +79,8 @@ def extract():
 
         out = data.loc[data['title'] == output[0]]
 
+        print(out['title'])
+        print(out['description'])
         for index, row in out.iterrows():
             # print('id: ', index)
             # print('Title: ', row['title'])
@@ -88,13 +90,14 @@ def extract():
             required_jd = row['description']
 
         vec = nlp(required_jd)
-        for i in range(len(candidate_data)):
+        # for i in range(len(candidate_data)):
+        for i in range(1000):
             skill = nlp(candidate_data['skill_name'][i])
             candidate_data['similarities'][i] = skill.similarity(vec)
 
         candidates_sorted = candidate_data.sort_values(by=['similarities'], ascending=False)
         print(candidates_sorted.head())
-    return render_template('result.html', out=out)
+    return render_template('result.html', out=out,)
 
 
 if __name__ == "__main__":

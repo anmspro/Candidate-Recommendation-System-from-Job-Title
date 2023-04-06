@@ -1,0 +1,26 @@
+/* .typed {
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    font-size: 1.6rem;
+    width: 0;
+    animation: typing 1s forwards;
+    overflow: hidden;
+    border-right: .15em solid orange;
+    font-size: 1.6rem;
+    width: 0;
+}
+
+.container {
+    display: inline-block;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+} */

@@ -8,22 +8,41 @@
     <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 
-<body>
-    <h2>Candidate Recommendation from Job Title</h2>
+<style>
+</style>
 
-    <form action="{{ url_for('extract')}}" method="post">
-        <div style="float:center;margin-right:20px;">
-            <label for="text"></label>
-            <!-- <textarea id="text" name="text" rows="10" cols="50"></textarea> -->
-            <input type="text" placeholder="Search" id="text" name="text"></input>
+<body>
+    <div class="p-6">
+        <h2 class="text-center">Job AI</h2>
+    </div>
+
+    <!-- <div class="spinner-border text-success" role="status" id="loader">
+        <span class="sr-only">Loading...</span>
+    </div> -->
+
+    <form id="input" action="{{ url_for('extract')}}" method="post">
+        <div class="input-group pb-3 pl-5 pr-5">
+            <input type="text" class="form-control" placeholder="Enter a job title" aria-label="Enter a job title"
+                aria-describedby="basic-addon2" id="text" name="text">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" value="Submit">Predict</button>
+            </div>
         </div>
-        <br>
-        <button class="button" value="Submit"><span>Predict</span></button>
     </form>
-    <br>
+
+    <script>
+        function onSubmit() {
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('input').style.display = 'none';
+        }
+    </script>
+
 </body>
 
 </html>

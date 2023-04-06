@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Api
 import spacy
 from spacy import displacy
 import numpy as np
@@ -45,6 +45,9 @@ def home():
 @app.route('/predict', methods=['GET', 'POST'])
 def extract():
     if request.method=='POST':
+        # check = False
+        # if check==False:
+        #     render_template('loader.html')
         txt = request.form['text']
         def sent2vect(text):
             vector = np.zeros(300,)
@@ -65,13 +68,14 @@ def extract():
         candidate_data = candidate_data[['id', 'candidate_name','skill_name']]
         candidate_data['similarities'] = 0.0
 
-        data['skills'] = ''
+        # data['skills'] = ''
 
         for i in range(data.shape[0]):
             data.at[i, 'title'] = data.at[i, 'title'].lower()
             data.at[i, 'title'] = re.sub("[\(\[].*?[\)\]]", "", data.at[i, 'title'])
             data.at[i, 'title'] = data.at[i, 'title'].translate(str.maketrans('', '', string.punctuation))
-
+        # data.to_csv('clean_title.csv')
+        # data = pd.read_csv('clean_title.csv')
         vector = sent2vect(txt)
 
         loaded_model = pickle.load(open('knn_model.sav', 'rb'))
@@ -79,14 +83,7 @@ def extract():
 
         out = data.loc[data['title'] == output[0]]
 
-        print(out['title'])
-        print(out['description'])
         for index, row in out.iterrows():
-            # print('id: ', index)
-            # print('Title: ', row['title'])
-            # print('Experience: ', row['experience'])
-            # print('Skills: ', row['skills'], '\n')
-            # print('Description: ', row['description'], '\n')
             required_jd = row['description']
 
         vec = nlp(required_jd)
@@ -96,9 +93,13 @@ def extract():
             candidate_data['similarities'][i] = skill.similarity(vec)
 
         candidates_sorted = candidate_data.sort_values(by=['similarities'], ascending=False)
-        print(candidates_sorted.head())
-    return render_template('result.html', out=out,)
+        soup = BeautifulSoup(required_jd, features="html.parser")
+        # check = True
+        # desc_soup = soup.get_text(separator=' ')
+        # print(soup.get_text(separator=' '))
+        # print(candidates_sorted.head())
 
+    return render_template('result.html', desc_soup=soup.get_text(separator=' '), title=out.iloc[0,0], desc=out.iloc[0,2], candidates=candidates_sorted) #title=title_html, desc=desc_html,
 
 if __name__ == "__main__":
-    app.run(port = 5000, debug=True, threaded=True)
+    app.run(debug=True) # port = 5000, 

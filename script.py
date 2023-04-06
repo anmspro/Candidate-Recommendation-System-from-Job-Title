@@ -1,2 +1,2 @@
-# set FLASK_APP=script.py      # this it the code  for windows.
+# set FLASK_APP=app.py      # this it the code  for windows.
 # run flask

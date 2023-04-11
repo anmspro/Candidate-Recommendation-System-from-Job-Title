@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <title>Candidate Recommendation from Job Title</title>
-    <!-- <link rel="stylesheet" href="result.css"> -->
+    <title>Job AI</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -82,21 +81,25 @@
         <div> {{ desc | safe }} </div>
         <!-- <textarea name="output" id="output" cols="30" rows="10">{{ title | safe }}</textarea> -->
         <!-- <textarea name="output" id="output" cols="30" rows="10">{{ title | safe }}</textarea> -->
-    </div>
-    <div>
-        <p> <b>Suggested candidates:</b> </p>
-        <div> {{ candidates['candidate_name'][0] }} </div>
-        <div> {{ candidates['candidate_name'][1] }} </div>
-        <div> {{ candidates['candidate_name'][2] }} </div>
-        <div> {{ candidates['candidate_name'][3] }} </div>
-        <div> {{ candidates['candidate_name'][4] }} </div>
-    </div>
-    <!-- </div>
+
+        <div>
+            <p> <b>Suggested candidates:</b> </p>
+            <div> {{ candidates['candidate_name'][0] }} </div>
+            <div> {{ candidates['candidate_name'][1] }} </div>
+            <div> {{ candidates['candidate_name'][2] }} </div>
+            <div> {{ candidates['candidate_name'][3] }} </div>
+            <div> {{ candidates['candidate_name'][4] }} </div>
+        </div>
+        <!-- </div>
     </div> -->
 
-    <button onclick="typeWriter()">Description Using Typewriter</button>
-    <span class="" id="demo"></span><span class="typewriter-cursor"></span>
-
+        <!-- <button onclick="typeWriter()">Description Using Typewriter</button>
+        <div>
+            <span class="" id="demo"></span>
+            <span class="typewriter-cursor"></span>
+        </div> -->
+        <br>
+    </div>
     <script>
         var i = 0;
         var txt = `{{ desc_soup }}`;

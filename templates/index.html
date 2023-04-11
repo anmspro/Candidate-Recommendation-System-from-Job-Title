@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Candidate Recommendation from Job Title</title>
+    <title>Job AI</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
@@ -27,20 +27,21 @@
     </div> -->
 
     <form id="input" action="{{ url_for('extract')}}" method="post">
-        <div class="input-group pb-3 pl-5 pr-5">
+        <div class="input-group pt-4 pb-3 pl-5 pr-5">
             <input type="text" class="form-control" placeholder="Enter a job title" aria-label="Enter a job title"
                 aria-describedby="basic-addon2" id="text" name="text">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" value="Submit">Predict</button>
+                <button class="btn btn-outline-secondary" type="submit" value="Submit">Predict</button>
             </div>
         </div>
     </form>
 
     <script>
-        function onSubmit() {
-            document.getElementById('loader').style.display = 'block';
-            document.getElementById('input').style.display = 'none';
-        }
+        // function onSubmit() {
+        //     // console.log('submit clicked')
+        //     document.getElementById('loader').style.display = 'block';
+        //     document.getElementById('input').style.display = 'none';
+        // }
     </script>
 
 </body>

@@ -84,10 +84,14 @@ def extract():
             skill = nlp(candidate_data['skill_name'][i])
             candidate_data['similarities'][i] = skill.similarity(vec)
 
+        # for index, row in tqdm(candidate_raw.iterrows(), total=candidate_raw.shape[0]):
+        #     skill = nlp(candidate_raw['skill_name'][index])
+        #     candidate_raw['similarities'][index] = skill.similarity(vec)
+
         candidates_sorted = candidate_data.sort_values(by=['similarities'], ascending=False)
         soup = BeautifulSoup(required_jd, features="html.parser")
 
     return render_template('result.html', desc_soup=soup.get_text(separator=' '), title=out.iloc[0,0], desc=out.iloc[0,2], candidates=candidates_sorted) #title=title_html, desc=desc_html,
 
 if __name__ == "__main__":
-    app.run(port = 8090, debug = True) # port = 5000, debug=True 
+    app.run(port = 5000, debug = True) # port = 5000, debug=True 

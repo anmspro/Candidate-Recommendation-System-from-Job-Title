@@ -84,11 +84,22 @@
 
         <div>
             <p> <b>Suggested candidates:</b> </p>
-            <div> {{ candidates['candidate_name'][0] }} </div>
-            <div> {{ candidates['candidate_name'][1] }} </div>
-            <div> {{ candidates['candidate_name'][2] }} </div>
-            <div> {{ candidates['candidate_name'][3] }} </div>
-            <div> {{ candidates['candidate_name'][4] }} </div>
+
+            <div>
+                <span> {{ candidates['candidate_name'][0] }} </span> <a href="/cv/{{candidates['id'][0]}}">Show CV</a>
+            </div>
+            <div>
+                <span> {{ candidates['candidate_name'][1] }} </span> <a href="/cv/{{candidates['id'][1]}}">Show CV</a>
+            </div>
+            <div>
+                <span> {{ candidates['candidate_name'][2] }} </span> <a href="/cv/{{candidates['id'][2]}}">Show CV</a>
+            </div>
+            <div>
+                <span> {{ candidates['candidate_name'][3] }} </span> <a href="/cv/{{candidates['id'][3]}}">Show CV</a>
+            </div>
+            <div>
+                <span> {{ candidates['candidate_name'][4] }} </span> <a href="/cv/{{candidates['id'][4]}}">Show CV</a>
+            </div>
         </div>
         <!-- </div>
     </div> -->

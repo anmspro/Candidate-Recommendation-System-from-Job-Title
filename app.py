@@ -19,8 +19,8 @@ for i in range(data.shape[0]):
     data.at[i, 'title'] = re.sub("[\(\[].*?[\)\]]", "", data.at[i, 'title'])
     data.at[i, 'title'] = data.at[i, 'title'].translate(str.maketrans('', '', string.punctuation))
 
-candidate_data = pd.read_csv('candidate database.csv', low_memory=False)
-candidate_data = candidate_data[['id', 'candidate_name','skill_name']]
+candidate = pd.read_csv('candidate database.csv', low_memory=False)
+candidate_data = candidate[['id', 'candidate_name','skill_name']]
 candidate_data['similarities'] = 0.0
 
 def sent2vect(text):
@@ -68,9 +68,11 @@ def extract():
         # data.to_csv('clean_title.csv')
         # data = pd.read_csv('clean_title.csv')
         # data = data.loc[:, ~data.columns.str.match('Unnamed')]
+        
         vector = sent2vect(txt)
 
-        loaded_model = pickle.load(open('knn_model.sav', 'rb'))
+        # loaded_model = pickle.load(open('knn_model.sav', 'rb'))
+        loaded_model = pickle.load(open('knn_model.pkl', 'rb'))
         output = loaded_model.predict(vector.reshape(1, -1))
 
         out = data.loc[data['title'] == output[0]]
@@ -92,6 +94,13 @@ def extract():
         soup = BeautifulSoup(required_jd, features="html.parser")
 
     return render_template('result.html', desc_soup=soup.get_text(separator=' '), title=out.iloc[0,0], desc=out.iloc[0,2], candidates=candidates_sorted) #title=title_html, desc=desc_html,
+
+@app.route('/cv/', defaults={'id': None})
+@app.route('/cv/<int:id>')
+def show_CV(id):
+    cv=candidate.loc[candidate['id'] == str(id)]
+    cv = cv.loc[:, ~cv.columns.str.match('Unnamed')]
+    return render_template('cv.html', cv=cv, len=cv.shape[1])
 
 if __name__ == "__main__":
     app.run(port = 5000, debug = True) # port = 5000, debug=True 

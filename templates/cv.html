@@ -1,0 +1,25 @@
+<html>
+
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="p-4">
+        {%for i in range(0, len)%}
+
+        <div class="row pb-2">
+            <div class="col-12 col-md-3">
+                {{cv.columns[i]}}
+            </div>
+            <div class="col-12 col-md-9">
+                {{cv[cv.columns[i]][cv.index[0]]}}
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</body>
+
+</html>

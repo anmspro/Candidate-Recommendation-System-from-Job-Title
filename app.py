@@ -9,6 +9,7 @@ import dill as pickle
 import string
 import re
 from bs4 import BeautifulSoup
+import joblib
 
 nlp = spacy.load('en_core_web_md')
 
@@ -21,7 +22,9 @@ for i in range(data.shape[0]):
 
 candidate = pd.read_csv('candidate database.csv', low_memory=False)
 candidate_data = candidate[['id', 'candidate_name','skill_name']]
-candidate_data['similarities'] = 0.0
+candidate_data = candidate_data.assign(similarities=0.0)
+
+# candidate_data['similarities'] = 0.0
 
 def sent2vect(text):
     vector = np.zeros(300,)
@@ -32,6 +35,11 @@ def sent2vect(text):
             valid_tokens += 1
     vector = vector/valid_tokens if valid_tokens > 1 else vector
     return vector
+
+# def cosine_distance(v1, v2):
+#     return cosine_distances([v1], [v2])[0]
+
+# metric = cosine_distance
 
 app = Flask(__name__)
 api = Api(app)
@@ -73,6 +81,7 @@ def extract():
 
         # loaded_model = pickle.load(open('knn_model.sav', 'rb'))
         loaded_model = pickle.load(open('knn_model.pkl', 'rb'))
+        # loaded_model = joblib.load('knn_model.joblib')
         output = loaded_model.predict(vector.reshape(1, -1))
 
         out = data.loc[data['title'] == output[0]]
@@ -85,6 +94,7 @@ def extract():
         for i in range(1000):
             skill = nlp(candidate_data['skill_name'][i])
             candidate_data['similarities'][i] = skill.similarity(vec)
+            # candidate_data.loc['similarities', i] = skill.similarity(vec)
 
         # for index, row in tqdm(candidate_raw.iterrows(), total=candidate_raw.shape[0]):
         #     skill = nlp(candidate_raw['skill_name'][index])

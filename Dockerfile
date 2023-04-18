@@ -1,5 +1,5 @@
 # FROM python:3.10-slim-buster
-FROM python:3.10-slim-bullseye
+FROM python:3.10
 WORKDIR /job-ai
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
